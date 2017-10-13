@@ -1,9 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>me.arminb.distsys</groupId>
-  <artifactId>sample</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <groupId>me.arminb.whizdb</groupId>
+  <artifactId>whizdb</artifactId>
+  <version>0.1.0</version>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
 
   <dependencies>
     <dependency>
@@ -13,15 +18,75 @@
       <scope>test</scope>
     </dependency>
       <dependency>
+          <groupId>org.cfg4j</groupId>
+          <artifactId>cfg4j-core</artifactId>
+          <version>4.4.0</version>
+      </dependency>
+      <dependency>
           <groupId>ch.qos.logback</groupId>
           <artifactId>logback-classic</artifactId>
           <version>1.2.3</version>
       </dependency>
+      <dependency>
+          <groupId>com.google.inject</groupId>
+          <artifactId>guice</artifactId>
+          <version>4.1.0</version>
+      </dependency>
+      <dependency>
+          <groupId>com.google.inject.extensions</groupId>
+          <artifactId>guice-multibindings</artifactId>
+          <version>4.1.0</version>
+      </dependency>
 
+      <dependency>
+          <groupId>org.apache.thrift</groupId>
+          <artifactId>libthrift</artifactId>
+          <version>1.0.0</version>
+          <scope>system</scope>
+          <systemPath>${basedir}/lib/libthrift-1.0.0.jar</systemPath>
+      </dependency>
+
+      <!-- Consul integration -->
+      <dependency>
+          <groupId>org.cfg4j</groupId>
+          <artifactId>cfg4j-consul</artifactId>
+          <version>4.4.0</version>
+      </dependency>
+
+      <!-- Git integration -->
+      <dependency>
+          <groupId>org.cfg4j</groupId>
+          <artifactId>cfg4j-git</artifactId>
+          <version>4.4.0</version>
+      </dependency>
   </dependencies>
   <build>
-    <finalName>webtest</finalName>
+    <finalName>whizdb</finalName>
       <plugins>
+          <plugin>
+              <groupId>org.apache.thrift.tools</groupId>
+              <artifactId>maven-thrift-plugin</artifactId>
+              <version>0.1.11</version>
+              <configuration>
+                  <generator>java</generator>
+              </configuration>
+              <executions>
+                  <execution>
+                      <id>thrift-sources</id>
+                      <phase>generate-sources</phase>
+                      <goals>
+                          <goal>compile</goal>
+                      </goals>
+                  </execution>
+                  <execution>
+                      <id>thrift-test-sources</id>
+                      <phase>generate-test-sources</phase>
+                      <goals>
+                          <goal>testCompile</goal>
+                      </goals>
+                  </execution>
+              </executions>
+          </plugin>
           <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-shade-plugin</artifactId>
@@ -52,7 +117,7 @@
                               <transformer
                                       implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                   <manifestEntries>
-                                      <Main-Class>me.arminb.Main</Main-Class>
+                                      <Main-Class>me.arminb.whizdb.Main</Main-Class>
                                   </manifestEntries>
                               </transformer>
                           </transformers>

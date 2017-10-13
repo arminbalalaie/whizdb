@@ -1,0 +1,5 @@
+port: 5051
+nodes:
+  - armin-UX303LN:5051
+  - server2:5052
+  - server3:5053
