@@ -45,20 +45,6 @@
           <scope>system</scope>
           <systemPath>${basedir}/lib/libthrift-1.0.0.jar</systemPath>
       </dependency>
-
-      <!-- Consul integration -->
-      <dependency>
-          <groupId>org.cfg4j</groupId>
-          <artifactId>cfg4j-consul</artifactId>
-          <version>4.4.0</version>
-      </dependency>
-
-      <!-- Git integration -->
-      <dependency>
-          <groupId>org.cfg4j</groupId>
-          <artifactId>cfg4j-git</artifactId>
-          <version>4.4.0</version>
-      </dependency>
   </dependencies>
   <build>
     <finalName>whizdb</finalName>
