@@ -96,13 +96,13 @@ public class WhizApplication implements Startable, Stoppable {
 
     private void startBackGroundServices() {
         for (BackgroundService service: backgroundServices.get()) {
-            new Thread(() -> service.start());
+            new Thread(() -> service.start()).start();
         }
     }
 
     private void stopBackGroundServices() {
         for (BackgroundService service: backgroundServices.get()) {
-            new Thread(() -> service.stop());
+            new Thread(() -> service.stop()).start();
         }
     }
 
